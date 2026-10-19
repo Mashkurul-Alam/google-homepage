@@ -1,0 +1,102 @@
+:root {
+  --bg: #fff; --text: #202124; --muted: #70757a; --border: #dfe1e5;
+  --hover-shadow: 0 1px 6px rgba(32,33,36,.28);
+  --btn-bg: #f8f9fa; --footer-bg: #f2f2f2; --link: #1a0dab;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #202124; --text: #e8eaed; --muted: #9aa0a6; --border: #5f6368;
+    --hover-shadow: 0 1px 6px rgba(0,0,0,.6);
+    --btn-bg: #303134; --footer-bg: #171717; --link: #8ab4f8;
+  }
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  display: flex; flex-direction: column;
+  background: var(--bg); color: var(--text);
+  font-family: Arial, Helvetica, sans-serif; font-size: 14px;
+}
+a { color: var(--text); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Header */
+header {
+  display: flex; justify-content: flex-end; align-items: center;
+  gap: 16px; padding: 14px 20px;
+}
+header a { font-size: 13px; }
+.apps {
+  width: 40px; height: 40px; border: 0; border-radius: 50%;
+  background: none; cursor: pointer; display: grid;
+  grid-template-columns: repeat(3, 4px); gap: 3px;
+  place-content: center;
+}
+.apps:hover { background: var(--btn-bg); }
+.apps span { width: 4px; height: 4px; border-radius: 50%; background: var(--muted); }
+.sign-in {
+  background: #1a73e8; color: #fff !important; padding: 9px 23px;
+  border-radius: 4px; font-weight: 500;
+}
+.sign-in:hover { background: #1b66c9; text-decoration: none; }
+
+/* Main */
+main {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; padding: 0 16px; margin-top: 8vh;
+}
+.logo {
+  font-family: "Product Sans", "Trebuchet MS", Arial, sans-serif;
+  font-size: clamp(56px, 14vw, 92px); font-weight: 500;
+  letter-spacing: -3px; margin: 0 0 28px; user-select: none;
+}
+.logo .b { color: #4285f4; } .logo .r { color: #ea4335; }
+.logo .y { color: #fbbc05; } .logo .g { color: #34a853; }
+
+.search-box {
+  position: relative; width: 100%; max-width: 584px;
+}
+.search-bar {
+  display: flex; align-items: center; height: 46px; padding: 0 14px;
+  border: 1px solid var(--border); border-radius: 24px;
+  background: var(--bg);
+}
+.search-bar:hover, .search-bar:focus-within { box-shadow: var(--hover-shadow); border-color: transparent; }
+.search-bar svg { flex: none; fill: var(--muted); }
+.search-bar input {
+  flex: 1; height: 100%; border: 0; outline: 0; background: none;
+  color: var(--text); font-size: 16px; padding: 0 12px;
+}
+.clear { display: none; border: 0; background: none; cursor: pointer; font-size: 22px; color: var(--muted); padding: 0 6px; }
+.search-bar.has-text .clear { display: block; }
+.search-bar.open { border-radius: 24px 24px 0 0; box-shadow: var(--hover-shadow); border-color: transparent; }
+
+/* Suggestions */
+.suggestions {
+  display: none; list-style: none; margin: 0; padding: 6px 0 12px;
+  position: absolute; left: 0; right: 0; top: 46px; z-index: 5;
+  background: var(--bg); border-radius: 0 0 24px 24px;
+  box-shadow: 0 4px 6px rgba(32,33,36,.28);
+}
+.suggestions.show { display: block; }
+.suggestions li { display: flex; align-items: center; gap: 12px; padding: 6px 16px; cursor: default; }
+.suggestions li.active, .suggestions li:hover { background: var(--btn-bg); }
+.suggestions svg { fill: var(--muted); flex: none; }
+
+.buttons { display: flex; gap: 12px; margin-top: 28px; }
+.buttons button {
+  background: var(--btn-bg); color: var(--text); border: 1px solid var(--btn-bg);
+  border-radius: 4px; padding: 0 16px; height: 36px; font-size: 14px; cursor: pointer;
+}
+.buttons button:hover { border-color: var(--border); box-shadow: 0 1px 1px rgba(0,0,0,.1); }
+.buttons button:focus-visible, .apps:focus-visible, .search-bar input:focus-visible { outline: 2px solid #4285f4; outline-offset: 2px; }
+
+.offered { margin-top: 28px; font-size: 13px; color: var(--muted); }
+.offered a { color: var(--link); margin-left: 4px; }
+
+/* Footer */
+footer { background: var(--footer-bg); color: var(--muted); font-size: 14px; }
+footer .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding: 15px 24px; }
+footer .row + .row { border-top: 1px solid var(--border); }
+footer .row div { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+footer a { color: var(--muted); }
